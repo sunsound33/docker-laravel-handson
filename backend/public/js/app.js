@@ -49886,8 +49886,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/co2a/docker-laravel-handson/backend/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/co2a/docker-laravel-handson/backend/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/sunsound33/docker-laravel-handson/backend/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/sunsound33/docker-laravel-handson/backend/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
