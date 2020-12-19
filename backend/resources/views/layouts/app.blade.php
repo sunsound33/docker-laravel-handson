@@ -58,15 +58,24 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('ログアウト') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
+                                    <a class="dropdown-item" href="{{ url('/mycart') }}">
+                                       カートを見る
+                                   </a>
                                 </div>
                             </li>
+                            <a href="{{ url('/mycart') }}" >
+                               <img src="{{ asset('image/cart.png') }}" class="cart" >
+                           </a>
                         @endguest
+
+                        
                     </ul>
                 </div>
             </div>
