@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ShopController@index');
+
+Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
+
+
+Route::get('/mycart', 'HomeController@myCart');
+Route::post('/mycart', 'ShopController@addMycart');
+
 
 Auth::routes();
 
