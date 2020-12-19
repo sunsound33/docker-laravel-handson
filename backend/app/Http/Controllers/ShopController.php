@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
-
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Cart;
+
 
 class ShopController extends Controller
 {
@@ -16,29 +16,37 @@ class ShopController extends Controller
         return view('shop',compact('stocks'));
     }
 
-    public function myCart()
+    public function myCart(Cart $cart)
     {
-        $my_carts = Cart::all();
-        return view('mycart',compact('my_carts')); 
+        $my_carts = $cart->showCart();
+        return view('mycart',compact('my_carts'));
     }
     
-    public function addMycart(Request $request)
-   {
-       $user_id = Auth::id(); 
+    public function addMycart(Request $request,Cart $cart)
+    {
+
+       //カートに追加の処理
        $stock_id=$request->stock_id;
+       $message = $cart->addCart($stock_id);
 
-       $cart_add_info=Cart::firstOrCreate(['stock_id' => $stock_id,'user_id' => $user_id]);
-
-       if($cart_add_info->wasRecentlyCreated){
-           $message = 'カートに追加しました';
-       }
-       else{
-           $message = 'カートに登録済みです';
-       }
-
-       $my_carts = Cart::where('user_id',$user_id)->get();
+       //追加後の情報を取得
+       $my_carts = $cart->showCart();
 
        return view('mycart',compact('my_carts' , 'message'));
 
-   }
+    }
+    
+    public function deleteCart(Request $request,Cart $cart)
+    {
+
+       //カートから削除の処理
+       $stock_id=$request->stock_id;
+       $message = $cart->deleteCart($stock_id);
+
+       //追加後の情報を取得
+       $my_carts = $cart->showCart();
+
+       return view('mycart',compact('my_carts' , 'message'));
+
+    }
 }
