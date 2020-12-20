@@ -10,13 +10,7 @@ class Cart extends Model
     protected $fillable = [
       'stock_id' , 'user_id' 
     ];
-
-    public function showCart()
-    {
-        $user_id = Auth::id();
-        return $this->where('user_id',$user_id)->get();
-    }
-  
+ 
     public function stock()
     {
         return $this->belongsTo('\App\Models\Stock');
@@ -49,5 +43,21 @@ class Cart extends Model
            }
            return $message;
     }
-  }
+    
+    public function showCart()
+    {
+       $user_id = Auth::id();
+       $data['my_carts'] = $this->where('user_id',$user_id)->get();
+
+       $data['count']=0;
+       $data['sum']=0;
+       
+       foreach($data['my_carts'] as $my_cart){
+           $data['count']++;
+           $data['sum'] += $my_cart->stock->fee;
+       }
+       return $data;
+    }
+
+}
 
