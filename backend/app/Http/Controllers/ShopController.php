@@ -12,9 +12,15 @@ use App\Mail\Thanks;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index(Stock $stock)
     {
-        $stocks = Stock::Paginate(6);
+        $stocks = $stock->sortable()->Paginate(6);
+        return view('shop',compact('stocks'));
+    }
+
+    public function sort(Request $request, Stock $stock)
+    {
+        print_r($request);exit();
         return view('shop',compact('stocks'));
     }
 

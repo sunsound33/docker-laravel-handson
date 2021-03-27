@@ -18,6 +18,29 @@
 
    <!-- Styles -->
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+   <script type="text/javascript">
+   $(function() {
+       //セレクトボックスが切り替わったら発動
+       $('select#sort_stock').change(function() {
+            //選択したvalue値を変数に格納
+            let sort_id = $(this).val();
+            $.ajaxSetup({
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            });
+            $.ajax({
+                type: "post",
+                url: "/sort",
+                data: { "sort_id" : sort_id },
+                dataType : "json"
+            }).done(function(data){
+                console.log('success');
+            }).fail(function(XMLHttpRequest, status, e){
+                alert(e);
+            });
+        });
+    });
+	</script>
 </head>
 <body>
    <div id="app">

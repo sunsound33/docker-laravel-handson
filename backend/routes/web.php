@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'ShopController@index');
+Route::post('/sort', 'ShopController@sort');
 
 Route::group(['middleware' => ['auth']], function () {
 
